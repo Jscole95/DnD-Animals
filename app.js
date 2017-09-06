@@ -1,4 +1,4 @@
-$("#animal-type").click((event) => {
+$("#animal-type").mouseup((event) => {
 	switch ($("#animal-type").val()){
 		case "all-animals":
 			$(".main-box").removeClass("invis2");
@@ -27,7 +27,7 @@ $("#animal-type").click((event) => {
 	}
 });
 
-$("#challenge-rating").click((event) => {
+$("#challenge-rating").mouseup((event) => {
 	switch ($("#challenge-rating").val()){
 		case "all":
 			$(".cr0").removeClass("invis3");
