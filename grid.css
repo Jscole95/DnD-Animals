@@ -2,6 +2,17 @@
   box-sizing: border-box;
 }
 
+.type{
+  width: 40%;
+  float: left;
+}
+
+.challenge{
+  width: 60%;
+  float: left;
+}
+
+
 .main-box{
   background-color: #DBECF6;
   border: 1px solid black;
@@ -41,4 +52,24 @@ h4{
 
 .invis, .invis2, .invis3{
   display: none;
+}
+
+@media only screen and (min-width: 640px){
+  .type{
+  width: 20%;
+}
+
+.challenge{
+  width: 80%;
+}
+}
+
+@media only screen and (min-width: 1024px){
+    .type{
+  width: 12%;
+}
+
+.challenge{
+  width: 88%;
+}
 }

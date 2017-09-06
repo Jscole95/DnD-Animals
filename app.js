@@ -1,4 +1,4 @@
-$("#animal-type").mouseup((event) => {
+$("#sqearch").click((event) => {
 	switch ($("#animal-type").val()){
 		case "all-animals":
 			$(".main-box").removeClass("invis2");
@@ -25,9 +25,7 @@ $("#animal-type").mouseup((event) => {
 		default:
 			break;
 	}
-});
 
-$("#challenge-rating").mouseup((event) => {
 	switch ($("#challenge-rating").val()){
 		case "all":
 			$(".cr0").removeClass("invis3");
@@ -111,6 +109,67 @@ $("#challenge-rating").mouseup((event) => {
 
 		default:
 			break;
+	}
+});
+
+$("#search").click((event) => {
+	event.preventDefault();
+	let x = 0;
+	$(".main-box").addClass("invis2 invis3");
+	if ($("#normal").is(":checked")){
+		$(".normal").removeClass("invis2");
+		x++;
+	}
+	if ($("#swimming").is(":checked")){
+		$(".swimming").removeClass("invis2");
+		x++;
+	}
+	if ($("#flying").is(":checked")){
+		$(".flying").removeClass("invis2");
+		x++;
+	}
+	if (x == 0){
+		$(".normal").removeClass("invis2");
+		$(".swimming").removeClass("invis2");
+		$(".flying").removeClass("invis2");
+	}
+	x = 0;
+	if ($("#cr0").is(":checked")){
+		$(".cr0").removeClass("invis3");
+		x++;
+	}
+	if ($("#cr1").is(":checked")){
+		$(".cr1").removeClass("invis3");
+		x++;
+	}
+	if ($("#cr2").is(":checked")){
+		$(".cr2").removeClass("invis3");
+		x++;
+	}
+	if ($("#cr3").is(":checked")){
+		$(".cr3").removeClass("invis3");
+		x++;
+	}
+	if ($("#cr4").is(":checked")){
+		$(".cr4").removeClass("invis3");
+		x++;
+	}
+	if ($("#cr5").is(":checked")){
+		$(".cr5").removeClass("invis3");
+		x++;
+	}
+	if ($("#cr6").is(":checked")){
+		$(".cr6").removeClass("invis3");
+		x++;
+	}
+	if (x == 0){
+		$(".cr0").removeClass("invis3");
+		$(".cr1").removeClass("invis3");
+		$(".cr2").removeClass("invis3");
+		$(".cr3").removeClass("invis3");
+		$(".cr4").removeClass("invis3");
+		$(".cr5").removeClass("invis3");
+		$(".cr6").removeClass("invis3");
 	}
 });
 

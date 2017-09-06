@@ -10,23 +10,24 @@
 	<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
 </head>
 <body>
-<div>
-<select id="animal-type">
-	<option value="all-animals">All</option>
-	<option value="normal">Normal</option>
-	<option value="swimming">Swimming</option>
-	<option value="flying">Flying</option>
-</select>
-<select id="challenge-rating">
-	<option value="all">All</option>
-	<option value="cr0">Challenge rating: 0</option>
-	<option value="cr1">Challenge rating: 1</option>
-	<option value="cr2">Challenge rating: 2</option>
-	<option value="cr3">Challenge rating: 3</option>
-	<option value="cr4">Challenge rating: 4</option>
-	<option value="cr5">Challenge rating: 5</option>
-	<option value="cr6">Challenge rating: 6</option>
-</select>
+<div class="search">
+	<form class="type">
+		<h3>Type</h3>
+		<input type="checkbox" id="normal" value="normal">Normal</option><br/>
+		<input type="checkbox" id="swimming" value="swimming">Swimming</option><br/>
+		<input type="checkbox" id="flying" value="flying">Flying</option>
+	</form>
+	<form class="challenge">
+		<h3>Challenge</h3>
+		<input type="checkbox" id="cr0" value="cr0">CR: 0</option>
+		<input type="checkbox" id="cr4" value="cr4">CR: 4</option><br/>
+		<input type="checkbox" id="cr1" value="cr1">CR: 1</option>
+		<input type="checkbox" id="cr5" value="cr5">CR: 5</option><br/>
+		<input type="checkbox" id="cr2" value="cr2">CR: 2</option>
+		<input type="checkbox" id="cr6" value="cr6">CR: 6</option><br/>
+		<input type="checkbox" id="cr3" value="cr3">CR: 3</option>
+	</form>
+	<button id="search">Search</button>
 </div>
 
 <div id="top">
