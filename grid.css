@@ -1,0 +1,44 @@
+*{
+  box-sizing: border-box;
+}
+
+.main-box{
+  background-color: #DBECF6;
+  border: 1px solid black;
+  border-radius: 20px;
+  overflow: hidden;
+  max-height: 24px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.info{
+  width: 33%;
+  float: left;
+  padding-left: 10px;
+}
+
+.expanded{
+  max-height: 2000px;
+}
+
+.skills{
+  margin: 10px;
+  float: left;
+  width: 93%;
+  text-align: justify;
+}
+
+
+h4{
+  margin: 0px;
+  padding-left: 10px;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.invis, .invis2, .invis3{
+  display: none;
+}
