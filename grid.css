@@ -2,16 +2,32 @@
   box-sizing: border-box;
 }
 
+button{
+  float:left;
+  clear: left;
+}
+
+.all{
+  max-width: 800px;
+  margin: auto;
+}
+
+.search{
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 180px;
+}
+
 .type{
   width: 40%;
   float: left;
 }
 
 .challenge{
-  width: 60%;
+  width: 40%;
   float: left;
 }
-
 
 .main-box{
   background-color: #DBECF6;
@@ -21,6 +37,9 @@
   max-height: 24px;
   margin-top: 15px;
   margin-bottom: 15px;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .info{
@@ -56,20 +75,20 @@ h4{
 
 @media only screen and (min-width: 640px){
   .type{
-  width: 20%;
+  swidth: 20%;
 }
 
 .challenge{
-  width: 80%;
+  swidth: 80%;
 }
 }
 
 @media only screen and (min-width: 1024px){
     .type{
-  width: 12%;
+  swidth: 12%;
 }
 
 .challenge{
-  width: 88%;
+  swidth: 88%;
 }
 }
