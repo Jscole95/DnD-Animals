@@ -1,121 +1,224 @@
-$("#search").click((event) => {
-	event.preventDefault();
-	let x = 0;
-	$(".main-box").addClass("invis2 invis3");
-	if ($("#normal").is(":checked")){
-		$(".normal").removeClass("invis2");
-		x++;
+let druidShapes = [];
+for (let key in enemies){
+	if (enemies[key]["druid type"] != undefined){
+		druidShapes.push(key);
 	}
-	if ($("#swimming").is(":checked")){
-		$(".swimming").removeClass("invis2");
-		x++;
+}
+druidShapes.sort();
+
+druidShapes.forEach(value => {
+
+	//Adds html text and all basic info
+	let animal = enemies[value];
+	let html = `<div class="animal center ${animal["druid type"]} ">`;
+	html += '<div class="info center">';
+	html += `<div class="name"><strong>${value}</strong></div>`;
+	let hp = findNumbers(animal.attributes.hp);
+	html += `<div class="col-1">HP: ${hp}</div>`;
+	let ac = findNumbers(animal.attributes.ac);
+	html += `<div class="col-1">AC: ${ac}</div>`;
+	html += `<div class="col-1">Size: ${animal.attributes.size}</div>`;
+	html += `<div class="col-3">Speed: ${animal.attributes.speed}</div>`;
+	html += `<div class="col-1">STR: ${animal.attributes.str}</div>`;
+	html += `<div class="col-1">DEX: ${animal.attributes.dex}</div>`;
+	html += `<div class="col-1">CON: ${animal.attributes.con}</div>`;
+
+	//Checks to make sure animal has specified values
+	if (animal.attributes.vulnerabilities != undefined){
+		let weakness = splitText(animal.attributes.vulnerabilities);
+		html += `<div class="col-1">Weakness:<br>${weakness}</div>`;
 	}
-	if ($("#flying").is(":checked")){
-		$(".flying").removeClass("invis2");
-		x++;
+	if (animal.attributes.resistances != undefined){
+		let resistance = splitText(animal.attributes.resistances);
+		html += `<div class="col-1">Resistances:<br>${resistance}</div>`;
+	}	
+	if (animal.attributes.skills != undefined){
+		let skills = splitText(animal.attributes.skills);
+		html += `<div class="col-1">Skills:<br>${skills}</div>`;
 	}
-	if (x == 0){
-		$(".normal").removeClass("invis2");
-		$(".swimming").removeClass("invis2");
-		$(".flying").removeClass("invis2");
+
+	//Goes through and adds each trait or action 
+	html += '</div><div class="info center"><h4>Traits</h4>';
+	for (let key in animal.traits){
+		html += `<div><strong>${key}</strong>: ${animal.traits[key]}</div><br>`;
 	}
-	x = 0;
-	if ($("#cr0").is(":checked")){
-		$(".cr0").removeClass("invis3");
-		x++;
+	html += '</div><div class="info center"><h4>Actions</h4>';
+	for (let key in animal.actions){
+		let attack = returnAttack(animal.actions[key])
+		html += `<div><strong>${key}</strong>: ${attack}</div><br>`;
 	}
-	if ($("#cr1").is(":checked")){
-		$(".cr1").removeClass("invis3");
-		x++;
+
+	//Checks if animal has a description or not
+	html += '</div>';
+	if (animal.description != ""){
+		html += `<p class="description center">${animal.description}</p>`;	
 	}
-	if ($("#cr2").is(":checked")){
-		$(".cr2").removeClass("invis3");
-		x++;
-	}
-	if ($("#cr3").is(":checked")){
-		$(".cr3").removeClass("invis3");
-		x++;
-	}
-	if ($("#cr4").is(":checked")){
-		$(".cr4").removeClass("invis3");
-		x++;
-	}
-	if ($("#cr5").is(":checked")){
-		$(".cr5").removeClass("invis3");
-		x++;
-	}
-	if ($("#cr6").is(":checked")){
-		$(".cr6").removeClass("invis3");
-		x++;
-	}
-	if (x == 0){
-		$(".cr0").removeClass("invis3");
-		$(".cr1").removeClass("invis3");
-		$(".cr2").removeClass("invis3");
-		$(".cr3").removeClass("invis3");
-		$(".cr4").removeClass("invis3");
-		$(".cr5").removeClass("invis3");
-		$(".cr6").removeClass("invis3");
-	}
+	html += '</div>';
+	let cr = `#cr${findCR(animal.attributes["challenge rating"])}`
+	$(cr).append(html);
 });
 
-function updateAnimals(){
-	let ret = [];
-	for (let key in animals){
-		let update = "";
-		let anim = animals[key];
-		update += `<div class="main-box ${anim.type} cr${anim.cr}" id="${key}">`;
-		let name = key.slice(0, 1).toUpperCase() + key.slice(1);
-		while (name.indexOf("-") != -1){
-			let x = name.indexOf("-");
-			name = name.slice(0, x) + " " + name.slice(x+1, x+2).toUpperCase() + name.slice(x+2, name.length);
-		}
-		update += `<h4>${name} - ${anim.cr}</h4><br/>`;
-		update += `<div class="health info">HP: ${anim.hp}</div>`;
-		update += `<div class="info">AC: ${anim.ac}</div>`;
-		update += `<div class="info">Speed: ${anim.speed}</div>`;
-		update += `<div class="info">STR: ${anim.str}</div>`;
-		update += `<div class="info">DEX: ${anim.dex}</div>`;
-		update += `<div class="info">CON: ${anim.con}</div>`;
-		update += `<div class="skills invis">`;
-		update += `<h3>Traits:</h3>`;
-		for (let trait in anim.traits){
-			update += `<p><span class="bold">${trait}</span>: ${anim.traits[trait]}</p>`;
-		}
-		update += `</div><div class="skills invis">`;
-		update += `<h3>Actions:</h3>`;
-		for (let ability in anim.abilities){
-			let realAbility = returnAttack(anim.abilities[ability])
-			update += `<p><span class="bold">${ability}</span>: ${realAbility}</p>`;
-		}
-		update += `</div></div>`;
-		ret.push(update);
-	}
-	ret.forEach(lol => {
-		$("#top").append(lol);
-	});
-};
-
-function returnAttack(ability){
-	let attack = ability.indexOf("Attack:");
-	let hit = ability.indexOf("Hit:");
-	let damage = ability.indexOf("damage");
-	let ret;
-	if (attack != -1){
-		ret = ability.slice(0, attack-1) + "<br/>&nbsp&nbsp" + ability.slice(attack, hit-1);
-		ret += "<br/>&nbsp&nbsp" + ability.slice(hit, damage+7);
-		if (ability.length > damage+7)
-			ret += "<br/>&nbsp&nbsp" + ability.slice(damage+8, ability.length);
-		return ret;
-	}
-	else return ability;
+for (let i = 2; i < 7; i++){
+	let id = `#cr${i}`;
+	$(id).hide();
 }
 
-$("#top").on("click", ".main-box", (event) => {
-	let test = "#" + event.currentTarget.id;
-	$(test).find(".skills").toggleClass("invis");
-	$(test).toggleClass("expanded");
+$(".swimming").hide();
+$(".flying").hide();
+
+let lv = "lv2";
+
+$("#level").change(event => {
+	lv = event.currentTarget.value;
+
+	if (lv == "lv2"){
+		$(".swimming").hide();
+		$(".flying").hide();
+	}
+
+	if (lv == "lv4" || lv == "lv6"){
+		if ($("#boxes")[0][0].checked || $("#boxes")[0][2].checked){
+			if ($("#boxes")[0][1].checked){
+				$(".swimming").show();
+			}
+		}
+		else $(".swimming").show();
+		$(".flying").hide();
+	}
+
+	if (lv == "lv8" || lv == "lv9" || lv == "lv12" || lv == "lv15" || lv == "lv18"){
+		if ($("#boxes")[0][0].checked || $("#boxes")[0][2].checked){
+			if ($("#boxes")[0][1].checked){
+				$(".swimming").show();
+			}
+		}
+		else $(".swimming").show();
+
+		if ($("#boxes")[0][0].checked || $("#boxes")[0][1].checked){
+			if ($("#boxes")[0][2].checked){
+				$(".flying").show();
+			}
+		}
+		else $(".flying").show();
+	}
+
+	if (lv == "lv6" || lv == "lv8" || lv == "lv9" || lv == "lv12" || lv == "lv15" || lv == "lv18"){
+		$("#cr2").show();
+	}
+	else $("#cr2").hide();
+
+	if (lv == "lv9" || lv == "lv12" || lv == "lv15" || lv == "lv18"){
+		$("#cr3").show();
+	}
+	else $("#cr3").hide();
+	
+	if (lv == "lv12" || lv == "lv15" || lv == "lv18"){
+		$("#cr4").show();
+	}
+	else $("#cr4").hide();
+	
+	if (lv == "lv15" || lv == "lv18"){
+		$("#cr5").show();
+	}
+	else $("#cr5").hide();
+	
+	if (lv == "lv18"){
+		$("#cr6").show();
+	}
+	else $("#cr6").hide();
 });
 
+$("#boxes").change(event => {
+	let x = 0;
+	if (event.currentTarget[0].checked){
+		x++;
+		$(".ground").show();
+	}
+	else $(".ground").hide();
 
-$(updateAnimals);
+
+	if (event.currentTarget[1].checked){
+		x++;
+		if (lv != "lv2"){
+			$(".swimming").show();
+		}
+	}
+	else $(".swimming").hide();
+
+	if (event.currentTarget[2].checked){
+		x++;
+		if (lv != "lv2" && lv != "lv4" && lv != "lv6"){
+			$(".flying").show();
+		}
+	}
+	else $(".flying").hide();
+	
+	if (x == 0){
+		$(".ground").show();
+		if (lv != "lv2"){
+			$(".swimming").show();
+		}
+		if (lv != "lv2" && lv != "lv4" && lv != "lv6"){
+			$(".flying").show();
+		}
+	}
+
+});
+
+$("#touch").on("click", ".animal", event =>{
+	if (event.currentTarget.className.indexOf("expanded") == -1){
+		event.currentTarget.className += "expanded";
+	}
+	else{
+		let cName = event.currentTarget.className.slice(0, event.currentTarget.className.indexOf("expanded"));
+		cName +=  event.currentTarget.className.slice(event.currentTarget.className.indexOf("expanded") + 8, event.currentTarget.className.length);
+		event.currentTarget.className = cName;
+	}
+});
+
+function findNumbers(text){
+	let ret = "";
+	while (text.indexOf("(") != 0 && text.length > 0){
+		ret += text.charAt(0);
+		text = text.slice(1);
+	}
+	return ret;
+}
+
+function splitText(text){
+	let ret = "";
+	while (text.length > 0){
+		if (text.charAt(0) != ","){
+			ret += text.charAt(0);
+		}
+		else {
+			ret += "<br>";
+			text = text.slice(1);
+		}
+		text = text.slice(1);
+	}
+	return ret;
+}
+
+function returnAttack(text){
+	let ret = "";
+	if (text.indexOf("Attack:") != -1){
+		ret += text.slice(text.indexOf("Attack:"), text.indexOf("Hit:"));
+		ret += "<br>";
+		ret += text.slice(text.indexOf("Hit:"), text.indexOf("damage") + 7);
+		ret += "<br>";
+		ret += text.slice(text.indexOf("damage") + 7, text.length);
+		return ret;
+	}
+	else return text;
+}
+
+function findCR(text){
+	if (text == "1/8")
+		return "18";
+	else if (text == "1/4")
+		return "14";
+	else if (text == "1/2")
+		return "12";
+	else return text;
+}

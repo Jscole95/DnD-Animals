@@ -1,44 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Dungeon and Dragon druid animal list</title>
+	<title>Dungeons and Dragons Druid Animal List</title>
 
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="stylesheet" type="text/css" href="grid.css">
 	<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="grid.css">
 </head>
-<body>
-<div class="all">
-	<div class="search">
-		<form class="type">
-			<h3>Type</h3>
-			<input type="checkbox" id="normal" value="normal">Normal</option><br/>
-			<input type="checkbox" id="swimming" value="swimming">Swimming</option><br/>
+<body class="center">
+
+<div class="search center">
+	<div class="col-2">
+		<select id="level">
+			<option value="lv2" selected="selected">Level 2</option>
+			<option value="lv4">Level 4</option>
+			<option value="lv6">Level 6</option>
+			<option value="lv8">Level 8</option>
+			<option value="lv9">Level 9</option>
+			<option value="lv12">Level 12</option>
+			<option value="lv15">Level 15</option>
+			<option value="lv18">Level 18</option>
+		</select>
+	</div>
+	<div class="col-2">
+		<form id="boxes">
+			<input type="checkbox" id="ground" value="ground">Ground</option><br>
+			<input type="checkbox" id="swimming" value="swimming">Swimming</option><br>
 			<input type="checkbox" id="flying" value="flying">Flying</option>
 		</form>
-		<form class="challenge">
-			<h3>Challenge</h3>
-			<input type="checkbox" id="cr0" value="cr0">CR: 0</option>
-			<input type="checkbox" id="cr4" value="cr4">CR: 4</option><br/>
-			<input type="checkbox" id="cr1" value="cr1">CR: 1</option>
-			<input type="checkbox" id="cr5" value="cr5">CR: 5</option><br/>
-			<input type="checkbox" id="cr2" value="cr2">CR: 2</option>
-			<input type="checkbox" id="cr6" value="cr6">CR: 6</option><br/>
-			<input type="checkbox" id="cr3" value="cr3">CR: 3</option>
-		</form><br/>
-	<button id="search">Search</button>
 	</div>
+</div>
 
-	<div id="top">
-	</div>
+<div id="touch">
+	<div id="cr0"><p class="cr center"><strong>Challenge Rating: 0</strong></p></div>
+	<div id="cr18"><p class="cr center"><strong>Challenge Rating: 1/8</strong></p></div>
+	<div id="cr14"><p class="cr center"><strong>Challenge Rating: 1/4</strong></p></div>
+	<div id="cr12"><p class="cr center"><strong>Challenge Rating: 1/2</strong></p></div>
+	<div id="cr1"><p class="cr center"><strong>Challenge Rating: 1</strong></p></div>
+	
+	<div id="cr2"><p class="cr center"><strong>Challenge Rating: 2</strong></p></div>
+	<div id="cr3"><p class="cr center"><strong>Challenge Rating: 3</strong></p></div>
+	<div id="cr4"><p class="cr center"><strong>Challenge Rating: 4</strong></p></div>
+	<div id="cr5"><p class="cr center"><strong>Challenge Rating: 5</strong></p></div>
+	<div id="cr6"><p class="cr center"><strong>Challenge Rating: 6</strong></p></div>
 </div>
 
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="animals.js"></script>
+<script type="text/javascript" src="enemy prototype.js"></script>
 <script type="text/javascript" src="app.js"></script>
 </body>
 </html>
-

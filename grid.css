@@ -2,93 +2,87 @@
   box-sizing: border-box;
 }
 
-button{
-  float:left;
-  clear: left;
+body{
+  max-width: 1024px;
 }
 
-.all{
-  max-width: 800px;
-  margin: auto;
-}
-
-.search{
-  width: 300px;
+.center{
   margin-left: auto;
   margin-right: auto;
-  height: 180px;
+  
 }
 
-.type{
-  width: 45%;
-  float: left;
-}
-
-.challenge{
-  width: 45%;
-  float: left;
-}
-
-.main-box{
+.animal{
   background-color: #DBECF6;
   border: 1px solid black;
   border-radius: 20px;
-  overflow: hidden;
-  max-height: 24px;
+  max-height: 30px;
   margin-top: 15px;
   margin-bottom: 15px;
-  width: 95%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.info{
-  width: 33%;
-  float: left;
-  padding-left: 10px;
+  overflow: hidden;
+  width: 97%;
 }
 
 .expanded{
   max-height: 2000px;
 }
 
-.skills{
-  margin: 10px;
+.name{
+  width: 95%;
   float: left;
-  width: 93%;
+}
+
+
+.info{
+  margin-top: 3px;
+  overflow: hidden;
+  width: 95%;
+  
+}
+
+.col-3{
+  width: 95%;
+  float: left;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 1%;
+  margin-right: 1%;
+  border-bottom: 1px solid #D3D3D3;
+}
+
+.col-2{
+  width: 46%;
+  float: left;
+  height: 70px;
+}
+
+.col-1{
+  width: 31%;
+  float: left;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 1%;
+  margin-right: 1%;
+  border-bottom: 1px solid #D3D3D3;
+}
+
+.description{
   text-align: justify;
+  color: grey;
+  width: 95%;
 }
 
-
-h4{
-  margin: 0px;
-  padding-left: 10px;
+.cr{
+  width: 95%;
+  border-bottom: 3px solid black;
 }
 
-.bold{
-  font-weight: bold;
+.search{
+  width: 300px;
+  height: 75px;
 }
 
-.invis, .invis2, .invis3{
-  display: none;
+select{
+  margin: 18%;
 }
 
-@media only screen and (min-width: 640px){
-  .type{
-  swidth: 20%;
-}
-
-.challenge{
-  swidth: 80%;
-}
-}
-
-@media only screen and (min-width: 1024px){
-    .type{
-  swidth: 12%;
-}
-
-.challenge{
-  swidth: 88%;
-}
-}
